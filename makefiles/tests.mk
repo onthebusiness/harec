@@ -80,7 +80,8 @@ tests = \
 	tests/33-yield \
 	tests/34-declarations \
 	tests/35-floats \
-	tests/36-defines
+	tests/36-defines \
+	tests/37-annotations
 
 
 tests/00-constants: $(HARECACHE)/rt.o $(HARECACHE)/testmod.o $(HARECACHE)/tests_00_constants.o
@@ -482,3 +483,13 @@ $(HARECACHE)/tests_36_defines.ssa: $(tests_36_defines_ha) $(HARECACHE)/rt.td
 	@mkdir -p -- $(HARECACHE)
 	@printf 'HAREC\t%s\n' '$@'
 	@$(TDENV) $(BINOUT)/harec $(HARECFLAGS) -o $@ $(tests_36_defines_ha)
+
+tests/37-annotations: $(HARECACHE)/rt.o $(HARECACHE)/tests_37_annotations.o
+	@printf 'LD\t%s\t\n' '$@'
+	@$(LD) $(LDLINKFLAGS) -T $(RTSCRIPT) -o $@ $(HARECACHE)/rt.o $(HARECACHE)/tests_37_annotations.o
+
+tests_37_annotations_ha = tests/37-annotations.ha
+$(HARECACHE)/tests_37_annotations.ssa: $(tests_37_annotations_ha) $(HARECACHE)/rt.td
+	@mkdir -p -- $(HARECACHE)
+	@printf 'HAREC\t%s\n' '$@'
+	@$(TDENV) $(BINOUT)/harec $(HARECFLAGS) -o $@ $(tests_37_annotations_ha)

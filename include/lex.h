@@ -132,7 +132,8 @@ enum lexical_token {
 	T_TIMESEQ,
 	T_BXOR,
 	T_BXOREQ,
-	T_LAST_OPERATOR = T_BXOREQ,
+	T_HASH,
+	T_LAST_OPERATOR = T_HASH,
 
 	// Tokens with additional information
 	T_NAME,
